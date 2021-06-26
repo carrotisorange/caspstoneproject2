@@ -29,19 +29,19 @@ def screen():
 
     if validated_input == 'rejectNumerical':
         return render_template('pages/index.html', error_message="Your input is not valid. Please enter a string.",
-                               product_idea=preprocessed_input)
+                               product_idea=validated_input)
     elif validated_input == 'rejectShortText':
         return render_template('pages/index.html', error_message="Your input is too short. Try longer string.",
-                               product_idea=preprocessed_input)
+                               product_idea=validated_input)
     elif validated_input == 'languageNotSupported':
         return render_template('pages/index.html',
                                error_message="Your language is not supported. Please enter a Tagalog/English "
                                              "string "
-                                             "only.", product_idea=preprocessed_input)
+                                             "only.", product_idea=validated_input)
 
-    classified_input = function.classify_input(preprocessed_input)
+    classified_input = function.classify_input(validated_input)
 
-    return render_template("pages/screen.html", classification=classified_input, product_idea=preprocessed_input)
+    return render_template("pages/screen.html", classification=classified_input, product_idea=validated_input)
 
 
 # 3. routes for dashboard page
