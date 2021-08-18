@@ -31,13 +31,16 @@ def screen():
         return render_template('pages/index.html', error_message="Your input is not valid. Please enter a string.",
                                product_idea=validated_input)
     elif validated_input == 'rejectShortText':
-        return render_template('pages/index.html', error_message="Your input is too short. Try longer string.",
+        return render_template('pages/index.html', error_message="Your input is too short. Please enter a longer "
+                                                                 "string.",
                                product_idea=validated_input)
     elif validated_input == 'languageNotSupported':
         return render_template('pages/index.html',
-                               error_message="Your language is not supported. Please enter a Tagalog/English "
-                                             "string "
-                                             "only.", product_idea=validated_input)
+                               error_message="Your language is not supported. Please enter an English string only.", product_idea=validated_input)
+    elif validated_input == 'inputIsNotANoun':
+        return render_template('pages/index.html',
+                               error_message="Your input is not a product idea. Please enter a noun."
+                               , product_idea=validated_input)
 
     classified_input = function.classify_input(validated_input)
 
@@ -48,7 +51,7 @@ def screen():
 @app.route('/dashboard')
 def dashboard():
     # datasets with complete complete product ideas
-    product_ideas = pd.read_csv("C://Users//hp user//Desktop//caspstoneproject2//dataset//dataset.csv")
+    product_ideas = pd.read_csv("C://Users//hp user//Desktop//caspstoneproject2//dataset//datasets.csv")
     product_ideas.dropna(subset=['product_idea'], inplace=True)
 
     # 5. get the top words based on frequency

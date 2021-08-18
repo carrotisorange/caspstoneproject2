@@ -6,6 +6,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from googletrans import Translator
 import pickle
+# import required modules
+import spacy
+
+nlp = spacy.load("en_core_web_lg")
 from collections import Counter
 from wordcloud import WordCloud, STOPWORDS
 
@@ -28,6 +32,7 @@ def preprocess_input(x):
 def validate_input(preprocessed_input):
     error = ""
     # reject numerical input
+    doc = nlp(preprocessed_input)
     if preprocessed_input.isdigit():
         error = "rejectNumerical"
         return error
@@ -35,20 +40,14 @@ def validate_input(preprocessed_input):
     elif len(preprocessed_input) < 3:
         error = "rejectShortText"
         return error
-    else:
-        # extract the language of the text
-        product_idea_lang = translator.detect(preprocessed_input).lang
+    elif translator.detect(preprocessed_input).lang != 'en' and translator.detect(preprocessed_input).lang != 'tl' and translator.detect(preprocessed_input).lang != 'ko':
+        error = 'languageNotSupported'
+        return error
+    elif doc[0].pos_ != 'NOUN':
+        error = "inputIsNotANoun"
+        return error
 
-        # condition for the language of text
-        if product_idea_lang == 'en':
-            validated_input = ps.make_base(preprocessed_input)
-            return validated_input
-        elif product_idea_lang == 'tl':
-            translated_input = ps.make_base(translator.translate(preprocessed_input).text)
-            return translated_input
-        else:
-            error = 'languageNotSupported'
-            return error
+    return ps.make_base(preprocessed_input)
 
 
 # 3. function to classify the input
