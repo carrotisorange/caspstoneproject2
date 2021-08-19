@@ -52,16 +52,25 @@ def validate_input(preprocessed_input):
 
 # 3. function to classify the input
 def classify_input(validated_input):
+    vectorized_input = get_vector(validated_input)
     classifier_f = open("C://Users//hp user//Desktop//caspstoneproject2//model//model.pickle", "rb")
     clf = pickle.load(classifier_f)
     classifier_f.close()
-    classification = clf.predict([validated_input])
+    classification = clf.predict([vectorized_input])
     if classification == [1]:
         result = '1'
     else:
         result = '0'
 
     return result
+
+
+# 4. function to convert the input into its vector representation
+def get_vector(validated_input):
+    doc = nlp(validated_input)
+    vectorized_input = doc.vector
+    print(vectorized_input)
+    return vectorized_input
 
 
 # 4. function to get the top words based on interaction count
