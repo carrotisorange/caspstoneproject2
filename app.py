@@ -55,7 +55,7 @@ def dashboard():
     product_ideas.dropna(subset=['product_idea'], inplace=True)
 
     # 5. get the top words based on frequency
-    top_new_product_ideas = function.get_the_top_product_ideas(product_ideas)
+    top_new_product_ideas = function.get_the_top_product_ideas(product_ideas.sort_values(by=['product_idea']))
 
     return render_template("pages/dashboard.html",
                            top_new_product_ideas=top_new_product_ideas.to_dict(orient='records'))

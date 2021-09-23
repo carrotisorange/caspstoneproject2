@@ -43,12 +43,11 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Product idea</th>
-                            <th>Potential market</th>
-                            <th>Stability of demand</th>
-                            <th>Trend of demand</th>
-                            <th>Market acceptance</th>
-                            <th>Label</th>
+                            <th class="text-left">Product idea</th>
+                            <th class="text-left">Potential market</th>
+                            <th class="text-left">Stability of demand</th>
+                            <th class="text-left">Trend of demand</th>
+                            <th class="text-left">Market acceptance</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,7 +60,7 @@
                             <td>{{row['stability_of_demand']}}</td>
                             <td>{{row['trend_of_demand']}}</td>
                             <td>{{row['market_acceptance']}}</td>
-                            <td>Good</td>
+
                         </tr>
                           {% set count.value = count.value + 1 %}
                     {% endfor %}
