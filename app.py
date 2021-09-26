@@ -36,7 +36,8 @@ def screen():
                                product_idea=validated_input)
     elif validated_input == 'languageNotSupported':
         return render_template('pages/index.html',
-                               error_message="Your language is not supported. Please enter an English string only.", product_idea=validated_input)
+                               error_message="Your language is not supported. Please enter an English/Tagalog string "
+                                             "only.", product_idea=validated_input)
     elif validated_input == 'inputIsNotANoun':
         return render_template('pages/index.html',
                                error_message="Your input is not a product idea. Please enter a noun."
