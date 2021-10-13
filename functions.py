@@ -53,7 +53,7 @@ def validate_input(preprocessed_input):
 # 3. function to classify the input
 def classify_input(validated_input):
     vectorized_input = get_vector(validated_input)
-    classifier_f = open("C://Users//hp user//Desktop//caspstoneproject2//model//model.pickle", "rb")
+    classifier_f = open("C://Users//hp user//Desktop//MIT//caspstoneproject2//model//model.pickle", "rb")
     clf = pickle.load(classifier_f)
     classifier_f.close()
     classification = clf.predict([vectorized_input])

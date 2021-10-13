@@ -52,7 +52,7 @@ def screen():
 @app.route('/dashboard')
 def dashboard():
     # datasets with complete complete product ideas
-    product_ideas = pd.read_csv("C://Users//hp user//Desktop//caspstoneproject2//dataset//datasets.csv")
+    product_ideas = pd.read_csv("C://Users//hp user//Desktop//MIT//caspstoneproject2//dataset//datasets.csv")
     product_ideas.dropna(subset=['product_idea'], inplace=True)
 
     # 5. get the top words based on frequency
