@@ -44,9 +44,9 @@ def validate_input(preprocessed_input):
             preprocessed_input).lang != 'tl' and translator.detect(preprocessed_input).lang != 'ko':
         error = 'languageNotSupported'
         return error
-    elif doc[0].pos_ != 'NOUN':
-        error = "inputIsNotANoun"
-        return error
+    # elif doc[0].pos_ != 'NOUN':
+    #     error = "inputIsNotANoun"
+    #     return error
 
     return ps.make_base(preprocessed_input)
 
@@ -54,7 +54,7 @@ def validate_input(preprocessed_input):
 # 3. function to classify the input
 def classify_input(validated_input):
     vectorized_input = get_vector(validated_input)
-    label = open("C://Users//hp user//Desktop//MIT//caspstoneproject2//model//ann_to_label.pickle", "rb")
+    label = open("C://Users//hp user//Desktop//MIT//caspstoneproject2//model//model_2.pickle", "rb")
     label_model = pickle.load(label)
     label.close()
     label_classification = label_model.predict([vectorized_input])
