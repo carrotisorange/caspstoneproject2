@@ -43,20 +43,22 @@ def screen():
                                error_message="Your input is not a product idea. Please enter a noun."
                                , product_idea=validated_input)
 
-    classified_input = function.classify_input(validated_input)
+    category = function.classify_product_idea(validated_input)
 
-    return render_template("pages/screen.html", classification=classified_input, product_idea=validated_input)
+    label = function.classify_input(category)
+
+    return render_template("pages/screen.html", classification=label, category=category, product_idea=validated_input)
 
 
 # 3. routes for dashboard page
 @app.route('/dashboard')
 def dashboard():
     # datasets with complete complete product ideas
-    product_ideas = pd.read_csv("C://Users//hp user//Desktop//MIT//caspstoneproject2//dataset//datasets.csv")
-    product_ideas.dropna(subset=['product_idea'], inplace=True)
+    product_ideas = pd.read_csv("C://Users//hp user//Desktop//MIT//caspstoneproject2//dataset//annotated_dataset.csv")
+    product_ideas.dropna(subset=['extracted_product_idea'], inplace=True)
 
     # 5. get the top words based on frequency
-    top_new_product_ideas = function.get_the_top_product_ideas(product_ideas.sort_values(by=['product_idea']))
+    top_new_product_ideas = function.get_the_top_product_ideas(product_ideas.sort_values(by=['extracted_product_idea']))
 
     return render_template("pages/dashboard.html",
                            top_new_product_ideas=top_new_product_ideas.to_dict(orient='records'))

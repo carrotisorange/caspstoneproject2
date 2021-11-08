@@ -44,6 +44,7 @@
                         <tr>
                             <th>#</th>
                             <th class="text-left">Product idea</th>
+                            <th class="text-left">Category</th>
                             <th class="text-left">Potential market</th>
                             <th class="text-left">Stability of demand</th>
                             <th class="text-left">Trend of demand</th>
@@ -55,7 +56,8 @@
                     {% for row in top_new_product_ideas %}
                         <tr>
                             <th>{{ count.value }}</th>
-                            <td>{{row['product_idea']}}</td>
+                            <td>{{row['extracted_product_idea']}}</td>
+                            <td>{{row['annotated_product_idea']}}</td>
                             <td>{{row['potential_market']}}</td>
                             <td>{{row['stability_of_demand']}}</td>
                             <td>{{row['trend_of_demand']}}</td>
