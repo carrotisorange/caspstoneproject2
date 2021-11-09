@@ -30,6 +30,8 @@ def preprocess_input(x):
 
 # 2. function to validate the input
 def validate_input(preprocessed_input):
+    product_ideas = pd.read_csv("C://Users//hp user//Desktop//MIT//caspstoneproject2//dataset//annotated_dataset.csv")
+    matches = product_ideas.loc[product_ideas['extracted_product_idea'].str.contains(preprocessed_input, case=False)]
     error = ""
     # reject numerical input
     doc = nlp(preprocessed_input)
@@ -44,9 +46,12 @@ def validate_input(preprocessed_input):
             preprocessed_input).lang != 'tl' and translator.detect(preprocessed_input).lang != 'ko':
         error = 'languageNotSupported'
         return error
-    # elif doc[0].pos_ != 'NOUN':
-    #     error = "inputIsNotANoun"
-    #     return error
+    elif doc[0].pos_ != 'NOUN':
+        error = "inputIsNotANoun"
+        return error
+    elif len(matches) <= 0:
+        error = "invalidProductIdea"
+        return error
 
     return ps.make_base(preprocessed_input)
 

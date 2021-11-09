@@ -43,6 +43,12 @@ def screen():
                                error_message="Your input is not a product idea. Please enter a noun."
                                , product_idea=validated_input)
 
+    elif validated_input == 'invalidProductIdea':
+        return render_template('pages/index.html',
+                               error_message="Your input is not a valid product idea. See sample product ideas in the "
+                                             "dashboard. "
+                               , product_idea=validated_input)
+
     category = function.classify_product_idea(validated_input)
 
     label = function.classify_input(category)
